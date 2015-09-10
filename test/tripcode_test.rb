@@ -7,11 +7,11 @@ class TripcodeTest < Minitest::Test
   end
 
   def test_nil_passwords
-    assert_equal "", Tripcode.hash(nil)
+    assert_equal '', Tripcode.hash(nil)
   end
 
   def test_blank_passwords
-    assert_equal "", Tripcode.hash("")
+    assert_equal '', Tripcode.hash('')
   end
 
   def test_ascii
