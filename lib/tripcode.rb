@@ -1,12 +1,8 @@
 require "tripcode/version"
 
 module Tripcode
-  @salt_table =  ('.' * 47).split('') + ['/'] + ('0'..'9').to_a
-  @salt_table += ('A'..'G').to_a + ('A'..'Z').to_a + ('a'..'f').to_a
-  @salt_table += ('a'..'z').to_a + ('.' * 133).split('')
-
   def self.sjis(str)
-    str.encode("shift_jis", invalid: :replace, undef: :replace, replace: '')
+    str.encode('shift_jis', 'utf-8', invalid: :replace, undef: :replace, replace: '')
   end
   
   def self.escape(str)
@@ -14,9 +10,11 @@ module Tripcode
   end
 
   def self.salt(password)
-    salt =  @salt_table["#{password}H.."[1].ord % 256]
-    salt += @salt_table["#{password}H.."[2].ord % 256]
-    return salt
+    password = password.encode("ASCII", "UTF-8", invalid: :replace, undef: :replace, replace: '.')
+    salt = (password[0..2] + 'H.')
+    salt.gsub!('[^\.-z]', '.')
+    salt.tr!(':;<=>?@[\\]^_`','ABCDEFGabcdef')
+    return salt[1..2]
   end
   
   def self.hash(password)

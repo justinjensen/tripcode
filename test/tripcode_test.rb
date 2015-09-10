@@ -14,7 +14,7 @@ class TripcodeTest < Minitest::Test
     assert_equal "", Tripcode.hash("")
   end
 
-  def test_symbols
+  def test_ascii
     assert_equal 'KNs1o0VDv6', Tripcode.hash('!')
     assert_equal 'z0MWdctOjE', Tripcode.hash('@')
     assert_equal 'u2YjtUz8MU', Tripcode.hash('#')
@@ -30,17 +30,23 @@ class TripcodeTest < Minitest::Test
     assert_equal 'tHbGiobWdM', Tripcode.hash('-')
     assert_equal 'XONm83jaIU', Tripcode.hash('.')
     assert_equal 'DGAVybFN0A', Tripcode.hash('/')
+    assert_equal '9xUxYS2dlM', Tripcode.hash('\\')
     assert_equal '8/08awL.AE', Tripcode.hash('\'')
     assert_equal 'gt1azVccY2', Tripcode.hash('"')
-    assert_equal "7h2f0/nQ3w", Tripcode.hash("[")
-    assert_equal "rjM99frkZs", Tripcode.hash("]")
-    assert_equal "odBt7a7lv6", Tripcode.hash("{")
-    assert_equal "ATNP9hXHcg", Tripcode.hash("}")
-    assert_equal ".BmRMKOub2", Tripcode.hash(":")
-    assert_equal "zglc7ct1Ls", Tripcode.hash(";")
-    assert_equal "cPUZU5OGFs", Tripcode.hash("?")
-    assert_equal "l.nT/qC3Ro", Tripcode.hash("`")
-    assert_equal "LpJR0bXBSc", Tripcode.hash("~")
+    assert_equal '7h2f0/nQ3w', Tripcode.hash('[')
+    assert_equal 'rjM99frkZs', Tripcode.hash(']')
+    assert_equal 'odBt7a7lv6', Tripcode.hash('{')
+    assert_equal 'ATNP9hXHcg', Tripcode.hash('}')
+    assert_equal '.BmRMKOub2', Tripcode.hash(':')
+    assert_equal 'zglc7ct1Ls', Tripcode.hash(';')
+    assert_equal 'cPUZU5OGFs', Tripcode.hash('?')
+    assert_equal 'l.nT/qC3Ro', Tripcode.hash('`')
+    assert_equal 'LpJR0bXBSc', Tripcode.hash('~')
+  end
+
+  def test_unicode
+    assert_equal 'c8eDXvwFLQ', Tripcode.hash('訛')
+    assert_equal 'Ez2xakpO4w', Tripcode.hash('ルビ')
   end
 
   def test_bulk_tripcodes
