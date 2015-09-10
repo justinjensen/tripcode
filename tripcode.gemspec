@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "4chan tripcodes in ruby"
   spec.description   = "4chan compatible tripcodes implemented in ruby."
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/justinjensen/tripcode"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
