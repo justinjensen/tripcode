@@ -21,8 +21,10 @@ Or install it yourself as:
 
 ## Usage
 
-    require 'tripcode'
-    Tripcode.hash('github') # => lLf/rxkwgg
+```ruby
+require 'tripcode'
+Tripcode.hash('github') # => lLf/rxkwgg
+```
 
 Or from the terminal
 
