@@ -23,12 +23,12 @@ Or install it yourself as:
 ## Usage
 
     require 'tripcode'
-    Tripcode.hash('github') # => 
+    Tripcode.hash('github') # => lLf/rxkwgg
 
 Or from the terminal
 
     $ tripcode github
-    github -> blah
+    github -> lLf/rxkwgg
 
 ## Development
 
