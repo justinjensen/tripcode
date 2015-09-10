@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'tripcode'
+
+password = ARGV[0]
+hash = Tripcode.hash(password)
+
+puts "#{password} -> #{hash}"
