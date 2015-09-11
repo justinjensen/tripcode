@@ -8,45 +8,42 @@ class TripcodeTest < Minitest::Test
 
   def test_nil_passwords
     assert_equal '', Tripcode.hash(nil)
+    assert_equal '', Tripcode.secure(nil)
   end
 
   def test_blank_passwords
     assert_equal '', Tripcode.hash('')
+    assert_equal '', Tripcode.secure('')
   end
 
-  def test_ascii
-    assert_equal 'KNs1o0VDv6', Tripcode.hash('!')
-    assert_equal 'z0MWdctOjE', Tripcode.hash('@')
-    assert_equal 'u2YjtUz8MU', Tripcode.hash('#')
-    assert_equal 'yflOPYrGcY', Tripcode.hash('$')
-    assert_equal '1t98deumW.', Tripcode.hash('%')
-    assert_equal 'gBeeWo4hQg', Tripcode.hash('^')
-    assert_equal 'MhCJJ7GVT.', Tripcode.hash('&')
-    assert_equal 'o8gKYE6H8A', Tripcode.hash('*')
-    assert_equal 'SGn2Wwr9CY', Tripcode.hash('(')
-    assert_equal 'E9k1wjKgHI', Tripcode.hash(')')
-    assert_equal 'IHLbs/YhoA', Tripcode.hash('+')
-    assert_equal 'YeQQgdCJE6', Tripcode.hash(',')
-    assert_equal 'tHbGiobWdM', Tripcode.hash('-')
-    assert_equal 'XONm83jaIU', Tripcode.hash('.')
-    assert_equal 'DGAVybFN0A', Tripcode.hash('/')
-    assert_equal '9xUxYS2dlM', Tripcode.hash('\\')
-    assert_equal '8/08awL.AE', Tripcode.hash('\'')
-    assert_equal 'gt1azVccY2', Tripcode.hash('"')
-    assert_equal '7h2f0/nQ3w', Tripcode.hash('[')
-    assert_equal 'rjM99frkZs', Tripcode.hash(']')
-    assert_equal 'odBt7a7lv6', Tripcode.hash('{')
-    assert_equal 'ATNP9hXHcg', Tripcode.hash('}')
-    assert_equal '.BmRMKOub2', Tripcode.hash(':')
-    assert_equal 'zglc7ct1Ls', Tripcode.hash(';')
-    assert_equal 'cPUZU5OGFs', Tripcode.hash('?')
-    assert_equal 'l.nT/qC3Ro', Tripcode.hash('`')
-    assert_equal 'LpJR0bXBSc', Tripcode.hash('~')
-  end
-
-  def test_unicode
+  def test_hash_general
+    assert_equal 'BpZUCmJAIQ', Tripcode.hash('!@#$%^&*')
+    assert_equal 'WALqTeQmv2', Tripcode.hash('$$')
+    assert_equal 'LLVegDyAFo', Tripcode.hash('@@')
+    assert_equal 'RYRu.UCnt.', Tripcode.hash('""')
+    assert_equal '74O3p/8R3A', Tripcode.hash('\'"')
     assert_equal 'c8eDXvwFLQ', Tripcode.hash('訛')
     assert_equal 'Ez2xakpO4w', Tripcode.hash('ルビ')
+    assert_equal 'Qy1ldS1UD.', Tripcode.hash('红宝石')
+  end
+ 
+  def test_secure_general
+    assert_equal 'gIkNUlZvepz21nd', Tripcode.secure('!@#$%^&*')
+    assert_equal '6YFELeXy+hHKkK+', Tripcode.secure('$$')
+    assert_equal 'a07Y6CsRRT06TbR', Tripcode.secure('@@')
+    assert_equal 'rTtIRSZbWpvDV7A', Tripcode.secure('""')
+    assert_equal '9Bo4QF25AoV+Cmv', Tripcode.secure('\'"')
+    assert_equal 'E++UhjAB7NF9q0m', Tripcode.secure('訛')
+    assert_equal 'v/J4kNSJHdqGdcp', Tripcode.secure('ルビ')
+    assert_equal 'G0nBWic9ldnq2yu', Tripcode.secure('红宝石')
+  end 
+
+  def test_parse
+    assert_equal ['', '', ''], Tripcode.parse('')
+    assert_equal ['', '', ''], Tripcode.parse('####')
+    assert_equal ['', "Mn5mzn8hAQ", ''], Tripcode.parse('#ruby')
+    assert_equal ['User', '', 'y65WdWQD6Zze1n3'], Tripcode.parse('User##password')
+    assert_equal ['User', 'ozOtJW9BFA', ''], Tripcode.parse('User#password')
   end
 
   def test_bulk_tripcodes
