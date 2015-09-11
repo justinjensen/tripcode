@@ -24,7 +24,7 @@ Or install it yourself as:
 ```ruby
 require 'tripcode'
 
-Tripcode.hash('github') # => lLf/rxkwg
+Tripcode.hash('github') # => 'lLf/rxkwg'
 Tripcode.secure('github') # => 'qhOg87mFbSndQap'
 Tripcode.secure('github','secret') # => 'ND8xVvinnkdyYkC' 
 Tripcode.parse('User#password#password') # => ['User', 'ozOtJW9BFA', 'y65WdWQD6Zze1n3']
